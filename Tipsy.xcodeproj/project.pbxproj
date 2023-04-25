@@ -15,6 +15,7 @@
 		84A00A8929F81B5000966E2C /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A00A8729F81B5000966E2C /* StartView.swift */; };
 		84A00A8C29F81B5A00966E2C /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A00A8A29F81B5900966E2C /* StartViewController.swift */; };
 		84A00A8D29F81B5A00966E2C /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A00A8B29F81B5900966E2C /* CustomViewController.swift */; };
+		84A00A9029F848FE00966E2C /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A00A8F29F848FE00966E2C /* Resources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		84A00A8729F81B5000966E2C /* StartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		84A00A8A29F81B5900966E2C /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		84A00A8B29F81B5900966E2C /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
+		84A00A8F29F848FE00966E2C /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		84A00A6C29F81A8900966E2C /* Tipsy */ = {
 			isa = PBXGroup;
 			children = (
+				84A00A8E29F848E600966E2C /* Helpers */,
 				84A00A8529F81B2100966E2C /* Model */,
 				84A00A8429F81B1A00966E2C /* Controllers */,
 				84A00A8329F81B0C00966E2C /* Views */,
@@ -95,6 +98,14 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		84A00A8E29F848E600966E2C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				84A00A8F29F848FE00966E2C /* Resources.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,6 +181,7 @@
 				84A00A8C29F81B5A00966E2C /* StartViewController.swift in Sources */,
 				84A00A8829F81B5000966E2C /* CustomView.swift in Sources */,
 				84A00A6E29F81A8900966E2C /* AppDelegate.swift in Sources */,
+				84A00A9029F848FE00966E2C /* Resources.swift in Sources */,
 				84A00A8D29F81B5A00966E2C /* CustomViewController.swift in Sources */,
 				84A00A8229F81AEC00966E2C /* SceneDelegate.swift in Sources */,
 				84A00A8929F81B5000966E2C /* StartView.swift in Sources */,

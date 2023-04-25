@@ -14,16 +14,202 @@ protocol StartViewDelegate: AnyObject {
 class StartView: CustomView {
 //    weak var delegate: MainViewDelegate?
     
+    private lazy var titleUITextField: UILabel = {
+        let element = UILabel()
+        element.text = "Enter bill total"
+        element.textAlignment = .left
+        element.font = UIFont.systemFont(ofSize: 25)
+        element.textColor = .lightGray
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+    }()
+    
+    private lazy var textField: UITextField = {
+        let element = UITextField()
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        element.attributedPlaceholder = NSAttributedString(string: "e.g. 123.56", attributes: [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 40),
+            NSAttributedString.Key.paragraphStyle: paragraphStyle
+        ])
+        
+        element.textColor = Resources.Colors.textFieldColor
+        element.textAlignment = .center
+        element.font = UIFont.systemFont(ofSize: 40)
+        
+        element.keyboardType = .decimalPad
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+    }()
+    
+    private lazy var centerView: UIView = {
+        let element = UIView()
+        element.backgroundColor = Resources.Colors.mainScreenColor
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+        
+    }()
+    
+    private lazy var tipLabel: UILabel = {
+        let element = UILabel()
+        element.text = "Select tip"
+        element.textAlignment = .left
+        element.font = UIFont.systemFont(ofSize: 25)
+        element.textColor = .lightGray
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+    }()
+    
+    private lazy var tipButtonsHStack: UIStackView = {
+        let element = UIStackView()
+        element.axis = .horizontal
+        element.distribution = .fillEqually
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+    }()
+    
+    private lazy var zeroPercentButton: UIButton = {
+        let element = UIButton()
+        element.restorationIdentifier = "Zero percent"
+        element.setTitle("0%", for: .normal)
+        element.setTitleColor(Resources.Colors.textFieldColor, for: .normal)
+        element.setTitleColor(.white, for: .highlighted)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 35)
+        element.translatesAutoresizingMaskIntoConstraints = false
+//        element.addTarget(self, action: #selector(percentButtonPressed), for: .touchUpInside)
+        return element
+    }()
+    
+    private lazy var tenPercentButton: UIButton = {
+        let element = UIButton()
+        element.restorationIdentifier = "Ten percent"
+        element.setTitle("10%", for: .normal)
+        element.setTitleColor(Resources.Colors.textFieldColor, for: .normal)
+        element.setTitleColor(.white, for: .selected)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 35)
+        element.backgroundColor = Resources.Colors.textFieldColor
+        element.isSelected = true
+        element.translatesAutoresizingMaskIntoConstraints = false
+//        element.addTarget(self, action: #selector(percentButtonPressed), for: .touchUpInside)
+        return element
+    }()
+    
+    private lazy var twentyPercentButton: UIButton = {
+        let element = UIButton()
+        element.restorationIdentifier = "Twenty percent"
+        element.setTitle("20%", for: .normal)
+        element.setTitleColor(Resources.Colors.textFieldColor, for: .normal)
+        element.setTitleColor(.white, for: .highlighted)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 35)
+        element.translatesAutoresizingMaskIntoConstraints = false
+//        element.addTarget(self, action: #selector(percentButtonPressed), for: .touchUpInside)
+        return element
+    }()
+    
+    private lazy var chooseSplitLabel: UILabel = {
+        let element = UILabel()
+        element.text = "Choose Split"
+        element.font = UIFont.systemFont(ofSize: 25)
+        element.textColor = .lightGray
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+    }()
+    
+    private lazy var splitHStack: UIStackView = {
+        let element = UIStackView()
+        element.axis = .horizontal
+        element.alignment = .fill
+        element.distribution = .fill
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+    }()
+    
+    private lazy var splitLabel: UILabel = {
+        let element = UILabel()
+        element.text = "0"
+        element.font = UIFont.systemFont(ofSize: 35)
+        element.textColor = Resources.Colors.textFieldColor
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+    }()
+    
+    private lazy var splitStepper: UIStepper = {
+        let element = UIStepper()
+        element.translatesAutoresizingMaskIntoConstraints = false
+//        element.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
+        return element
+    }()
+    
+    private lazy var calculateButton: UIButton = {
+        let element = UIButton()
+        element.restorationIdentifier = "Calculate"
+        element.backgroundColor = Resources.Colors.textFieldColor
+        element.setTitle("Calculate", for: .normal)
+        element.setTitleColor(.white, for: .normal)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 35)
+        element.layer.cornerRadius = 10
+        element.translatesAutoresizingMaskIntoConstraints = false
+//        element.addTarget(self, action: #selector(calculateButtonTapped), for: .touchUpInside)
+        return element
+    }()
+    
     override func setViews() {
         super.setViews()
         
-        // Add subviews
+        self.addSubview(titleUITextField)
+        self.addSubview(textField)
+        self.addSubview(centerView)
+        self.addSubview(tipLabel)
+        self.addSubview(tipButtonsHStack)
+        self.addSubview(chooseSplitLabel)
+        self.addSubview(splitHStack)
+        self.addSubview(calculateButton)
+        
+        tipButtonsHStack.addArrangedSubview(zeroPercentButton)
+        tipButtonsHStack.addArrangedSubview(tenPercentButton)
+        tipButtonsHStack.addArrangedSubview(twentyPercentButton)
+        
+        splitHStack.addArrangedSubview(splitLabel)
+        splitHStack.addArrangedSubview(splitStepper)
     }
     
     override func layoutViews() {
         super.layoutViews()
         
-        // Add constraints
+        NSLayoutConstraint.activate([
+            titleUITextField.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
+            titleUITextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 50),
+            
+            textField.topAnchor.constraint(equalTo: titleUITextField.bottomAnchor, constant: 10),
+            textField.heightAnchor.constraint(equalToConstant: 100),
+            textField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            textField.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            
+            centerView.topAnchor.constraint(equalTo: textField.bottomAnchor),
+            centerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            centerView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            centerView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            
+            tipLabel.topAnchor.constraint(equalTo: centerView.topAnchor, constant: 20),
+            tipLabel.leadingAnchor.constraint(equalTo: centerView.leadingAnchor, constant: 50),
+            
+            tipButtonsHStack.topAnchor.constraint(equalTo: tipLabel.bottomAnchor, constant: 20),
+            tipButtonsHStack.leadingAnchor.constraint(equalTo: centerView.leadingAnchor, constant: 10),
+            tipButtonsHStack.trailingAnchor.constraint(equalTo: centerView.trailingAnchor, constant: -10),
+            
+            chooseSplitLabel.topAnchor.constraint(equalTo: tipButtonsHStack.bottomAnchor, constant: 40),
+            chooseSplitLabel.leadingAnchor.constraint(equalTo: centerView.leadingAnchor, constant: 50),
+            
+            splitHStack.topAnchor.constraint(equalTo: chooseSplitLabel.bottomAnchor, constant: 30),
+            splitHStack.centerXAnchor.constraint(equalTo: centerView.centerXAnchor),
+            splitHStack.widthAnchor.constraint(equalToConstant: 170),
+            
+            calculateButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            calculateButton.centerXAnchor.constraint(equalTo: centerView.centerXAnchor),
+            calculateButton.heightAnchor.constraint(equalToConstant: 65),
+            calculateButton.widthAnchor.constraint(equalToConstant: 200),
+        ])
     }
 }
 
