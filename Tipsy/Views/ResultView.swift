@@ -8,11 +8,11 @@
 import UIKit
 
 protocol ResultViewDelegate: AnyObject {
-//    func ResultView(_ view: ResultView, didTapRecalculateButton button: UIButton)
+    func ResultView(_ view: ResultView, didTapRecalculateButton button: UIButton)
 }
 
 class ResultView: CustomView {
-//    weak var delegate: ResultViewDelegate?
+    weak var delegate: ResultViewDelegate?
     
     private lazy var topView: UIView = {
         let element = UIView()
@@ -61,7 +61,7 @@ class ResultView: CustomView {
         element.titleLabel?.font = UIFont.systemFont(ofSize: 35)
         element.layer.cornerRadius = 10
         element.translatesAutoresizingMaskIntoConstraints = false
-//        element.addTarget(self, action: #selector(didTapRecalculateButton), for: .touchUpInside)
+        element.addTarget(self, action: #selector(didTapRecalculateButton), for: .touchUpInside)
         return element
     }()
     
@@ -107,7 +107,7 @@ class ResultView: CustomView {
 
 //MARK: - Targets
 private extension ResultView {
-//    @objc func didTapCalculateButton(_ button: UIButton) {
-//        delegate?.ResultView(self, didTapCalculateButton: button)
-//    }
+    @objc func didTapRecalculateButton(_ button: UIButton) {
+        delegate?.ResultView(self, didTapRecalculateButton: button)
+    }
 }

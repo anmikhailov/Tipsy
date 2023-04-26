@@ -25,6 +25,9 @@ extension StartViewController: StartViewDelegate {
         customView.tipChanged(sender: button)
     }
     func StartView(_ view: StartView, didTapCalculateButton button: UIButton) {
+        let resultVC = ResultViewController()
+        resultVC.modalPresentationStyle = .fullScreen
+        self.present(resultVC, animated: true)
         print(tipValue ?? 0.0)
     }
 }
