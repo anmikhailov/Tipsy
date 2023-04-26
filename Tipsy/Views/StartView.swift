@@ -260,6 +260,10 @@ class StartView: CustomView {
         splitLabel.text = String(number)
         textField.endEditing(true)
     }
+    
+    func getTextFieldData() -> String {
+        return textField.text ?? "0.0"
+    }
 }
 
 //MARK: - Actions

@@ -18,6 +18,7 @@
 		84A00A9029F848FE00966E2C /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A00A8F29F848FE00966E2C /* Resources.swift */; };
 		84A00A9229F96E5700966E2C /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A00A9129F96E5700966E2C /* ResultView.swift */; };
 		84A00A9429F96E6900966E2C /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A00A9329F96E6900966E2C /* ResultViewController.swift */; };
+		84A00A9629F9B7C100966E2C /* CalculatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A00A9529F9B7C100966E2C /* CalculatorManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		84A00A8F29F848FE00966E2C /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		84A00A9129F96E5700966E2C /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		84A00A9329F96E6900966E2C /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		84A00A9529F9B7C100966E2C /* CalculatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		84A00A8529F81B2100966E2C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84A00A9529F9B7C100966E2C /* CalculatorManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				84A00A8D29F81B5A00966E2C /* CustomViewController.swift in Sources */,
 				84A00A9229F96E5700966E2C /* ResultView.swift in Sources */,
 				84A00A8229F81AEC00966E2C /* SceneDelegate.swift in Sources */,
+				84A00A9629F9B7C100966E2C /* CalculatorManager.swift in Sources */,
 				84A00A8929F81B5000966E2C /* StartView.swift in Sources */,
 				84A00A9429F96E6900966E2C /* ResultViewController.swift in Sources */,
 			);

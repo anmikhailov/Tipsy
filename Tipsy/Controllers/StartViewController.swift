@@ -12,6 +12,8 @@ class StartViewController: CustomViewController<StartView> {
     var tipValue: Float = 0.0
     var personNumber = 1
     
+    let calculatorManager = CalculatorManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,7 +24,7 @@ class StartViewController: CustomViewController<StartView> {
 extension StartViewController: StartViewDelegate {
     func StartView(_ view: StartView, didTapTipButton button: UIButton) {
         let tipValueString = button.restorationIdentifier!
-        tipValue = Float(Int(tipValueString)!) / Float(100)
+        calculatorManager.tipPercentageString = tipValueString
         customView.tipChanged(sender: button)
     }
     
@@ -32,9 +34,11 @@ extension StartViewController: StartViewDelegate {
     }
     
     func StartView(_ view: StartView, didTapCalculateButton button: UIButton) {
+        calculatorManager.billTotal = Float(customView.getTextFieldData()) ?? 0.0
+        
         let resultVC = ResultViewController()
         resultVC.modalPresentationStyle = .fullScreen
         self.present(resultVC, animated: true)
-        print(tipValue)
+        print(calculatorManager.getTotalPerPerson())
     }
 }
