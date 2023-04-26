@@ -251,10 +251,13 @@ class StartView: CustomView {
         twentyPercentButton.isSelected = false
         
         sender.isSelected = true
+        
+        textField.endEditing(true)
     }
     
     func changePerson(number: Int) {
         splitLabel.text = String(number)
+        textField.endEditing(true)
     }
 }
 
