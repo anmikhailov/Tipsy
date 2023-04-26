@@ -8,11 +8,11 @@
 import UIKit
 
 protocol StartViewDelegate: AnyObject {
-//    func RightView(_ view: RightView, didTapButton button: UIButton)
+    func StartView(_ view: StartView, didTapTipButton button: UIButton)
 }
 
 class StartView: CustomView {
-//    weak var delegate: MainViewDelegate?
+    weak var delegate: StartViewDelegate?
     
     private lazy var titleUITextField: UILabel = {
         let element = UILabel()
@@ -64,46 +64,56 @@ class StartView: CustomView {
     private lazy var tipButtonsHStack: UIStackView = {
         let element = UIStackView()
         element.axis = .horizontal
-        element.distribution = .fillEqually
+        element.distribution = .equalSpacing
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
     private lazy var zeroPercentButton: UIButton = {
         let element = UIButton()
-        element.restorationIdentifier = "Zero percent"
+        element.restorationIdentifier = "0"
         element.setTitle("0%", for: .normal)
         element.setTitleColor(Resources.Colors.textFieldColor, for: .normal)
-        element.setTitleColor(.white, for: .highlighted)
+        element.setBackgroundImage(imageWithColor(.init(white: 0, alpha: 0)), for: .normal)
+        element.setTitleColor(.white, for: .selected)
+        element.setBackgroundImage(imageWithColor(Resources.Colors.textFieldColor), for: .selected)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 35)
+        element.layer.cornerRadius = 8
+        element.layer.masksToBounds = true
         element.translatesAutoresizingMaskIntoConstraints = false
-//        element.addTarget(self, action: #selector(percentButtonPressed), for: .touchUpInside)
+        element.addTarget(self, action: #selector(didTapTipButton), for: .touchUpInside)
         return element
     }()
     
     private lazy var tenPercentButton: UIButton = {
         let element = UIButton()
-        element.restorationIdentifier = "Ten percent"
+        element.restorationIdentifier = "10"
         element.setTitle("10%", for: .normal)
         element.setTitleColor(Resources.Colors.textFieldColor, for: .normal)
+        element.setBackgroundImage(imageWithColor(.init(white: 0, alpha: 0)), for: .normal)
         element.setTitleColor(.white, for: .selected)
+        element.setBackgroundImage(imageWithColor(Resources.Colors.textFieldColor), for: .selected)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 35)
-        element.backgroundColor = Resources.Colors.textFieldColor
-        element.isSelected = true
+        element.layer.cornerRadius = 8
+        element.layer.masksToBounds = true
         element.translatesAutoresizingMaskIntoConstraints = false
-//        element.addTarget(self, action: #selector(percentButtonPressed), for: .touchUpInside)
+        element.addTarget(self, action: #selector(didTapTipButton), for: .touchUpInside)
         return element
     }()
     
     private lazy var twentyPercentButton: UIButton = {
         let element = UIButton()
-        element.restorationIdentifier = "Twenty percent"
+        element.restorationIdentifier = "20"
         element.setTitle("20%", for: .normal)
         element.setTitleColor(Resources.Colors.textFieldColor, for: .normal)
-        element.setTitleColor(.white, for: .highlighted)
+        element.setBackgroundImage(imageWithColor(.init(white: 0, alpha: 0)), for: .normal)
+        element.setTitleColor(.white, for: .selected)
+        element.setBackgroundImage(imageWithColor(Resources.Colors.textFieldColor), for: .selected)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 35)
+        element.layer.cornerRadius = 8
+        element.layer.masksToBounds = true
         element.translatesAutoresizingMaskIntoConstraints = false
-//        element.addTarget(self, action: #selector(percentButtonPressed), for: .touchUpInside)
+        element.addTarget(self, action: #selector(didTapTipButton), for: .touchUpInside)
         return element
     }()
     
@@ -195,8 +205,17 @@ class StartView: CustomView {
             tipLabel.leadingAnchor.constraint(equalTo: centerView.leadingAnchor, constant: 50),
             
             tipButtonsHStack.topAnchor.constraint(equalTo: tipLabel.bottomAnchor, constant: 20),
-            tipButtonsHStack.leadingAnchor.constraint(equalTo: centerView.leadingAnchor, constant: 10),
-            tipButtonsHStack.trailingAnchor.constraint(equalTo: centerView.trailingAnchor, constant: -10),
+            tipButtonsHStack.leadingAnchor.constraint(equalTo: centerView.leadingAnchor, constant: 60),
+            tipButtonsHStack.trailingAnchor.constraint(equalTo: centerView.trailingAnchor, constant: -60),
+            
+            zeroPercentButton.heightAnchor.constraint(equalToConstant: 50),
+            zeroPercentButton.widthAnchor.constraint(equalToConstant: 90),
+            
+            tenPercentButton.heightAnchor.constraint(equalToConstant: 50),
+            tenPercentButton.widthAnchor.constraint(equalToConstant: 90),
+            
+            twentyPercentButton.heightAnchor.constraint(equalToConstant: 50),
+            twentyPercentButton.widthAnchor.constraint(equalToConstant: 90),
             
             chooseSplitLabel.topAnchor.constraint(equalTo: tipButtonsHStack.bottomAnchor, constant: 40),
             chooseSplitLabel.leadingAnchor.constraint(equalTo: centerView.leadingAnchor, constant: 50),
@@ -211,11 +230,30 @@ class StartView: CustomView {
             calculateButton.widthAnchor.constraint(equalToConstant: 200),
         ])
     }
+    
+    func imageWithColor(_ color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
+    
+    func tipChanged(sender: UIButton) {
+        zeroPercentButton.isSelected = false
+        tenPercentButton.isSelected = false
+        twentyPercentButton.isSelected = false
+        
+        sender.isSelected = true
+    }
 }
 
 //MARK: - Actions
-//private extension MainView {
-//    @objc func didTapButton(_ button: UIButton) {
-//        delegate?.RightView(self, didTapButton: button)
-//    }
-//}
+private extension StartView {
+    @objc func didTapTipButton(_ button: UIButton) {
+        delegate?.StartView(self, didTapTipButton: button)
+    }
+}

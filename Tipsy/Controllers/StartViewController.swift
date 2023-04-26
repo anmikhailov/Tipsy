@@ -9,14 +9,18 @@ import UIKit
 
 class StartViewController: CustomViewController<StartView> {
        
+    var tipValue: Float?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        customView.delegate = self
+        customView.delegate = self
     }
 }
 
-//extension GameViewController: GameViewDelegate {
-//    func GameView(_ view: GameView, didTapButton button: UIButton) {
-//    }
-//}
+extension StartViewController: StartViewDelegate {
+    func StartView(_ view: StartView, didTapTipButton button: UIButton) {
+        tipValue = Float(Int(button.restorationIdentifier!)!) / Float(100)
+        customView.tipChanged(sender: button)
+    }
+}
