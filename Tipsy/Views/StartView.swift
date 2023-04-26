@@ -38,6 +38,7 @@ class StartView: CustomView {
         
         element.textColor = Resources.Colors.textFieldColor
         element.textAlignment = .center
+        //TODO: bold font and add input mask
         element.font = UIFont.systemFont(ofSize: 40)
         
         element.keyboardType = .decimalPad
