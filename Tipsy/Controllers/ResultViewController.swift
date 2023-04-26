@@ -9,10 +9,15 @@ import UIKit
 
 class ResultViewController: CustomViewController<ResultView> {
     
+    var totalPerPerson: Float = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         customView.delegate = self
+        
+        //TODO: Add format
+        customView.setTotalPerPersonLabel(text: String(totalPerPerson))
     }
     
 }

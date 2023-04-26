@@ -103,6 +103,10 @@ class ResultView: CustomView {
             
         ])
     }
+    
+    func setTotalPerPersonLabel(text: String) {
+        moneyLabel.text = text
+    }
 }
 
 //MARK: - Targets

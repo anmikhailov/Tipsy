@@ -38,6 +38,7 @@ extension StartViewController: StartViewDelegate {
         
         let resultVC = ResultViewController()
         resultVC.modalPresentationStyle = .fullScreen
+        resultVC.totalPerPerson = calculatorManager.getTotalPerPerson()
         self.present(resultVC, animated: true)
         print(calculatorManager.getTotalPerPerson())
     }
