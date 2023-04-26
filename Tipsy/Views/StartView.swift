@@ -9,6 +9,7 @@ import UIKit
 
 protocol StartViewDelegate: AnyObject {
     func StartView(_ view: StartView, didTapTipButton button: UIButton)
+    func StartView(_ view: StartView, didTapCalculateButton button: UIButton)
 }
 
 class StartView: CustomView {
@@ -160,7 +161,7 @@ class StartView: CustomView {
         element.titleLabel?.font = UIFont.systemFont(ofSize: 35)
         element.layer.cornerRadius = 10
         element.translatesAutoresizingMaskIntoConstraints = false
-//        element.addTarget(self, action: #selector(calculateButtonTapped), for: .touchUpInside)
+        element.addTarget(self, action: #selector(didTapCalculateButton), for: .touchUpInside)
         return element
     }()
     
@@ -255,5 +256,9 @@ class StartView: CustomView {
 private extension StartView {
     @objc func didTapTipButton(_ button: UIButton) {
         delegate?.StartView(self, didTapTipButton: button)
+    }
+    
+    @objc func didTapCalculateButton(_ button: UIButton) {
+        delegate?.StartView(self, didTapCalculateButton: button)
     }
 }

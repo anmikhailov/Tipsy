@@ -20,7 +20,11 @@ class StartViewController: CustomViewController<StartView> {
 
 extension StartViewController: StartViewDelegate {
     func StartView(_ view: StartView, didTapTipButton button: UIButton) {
-        tipValue = Float(Int(button.restorationIdentifier!)!) / Float(100)
+        let tipValueString = button.restorationIdentifier!
+        tipValue = Float(Int(tipValueString)!) / Float(100)
         customView.tipChanged(sender: button)
+    }
+    func StartView(_ view: StartView, didTapCalculateButton button: UIButton) {
+        print(tipValue ?? 0.0)
     }
 }
