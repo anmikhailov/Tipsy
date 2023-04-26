@@ -9,7 +9,8 @@ import UIKit
 
 class StartViewController: CustomViewController<StartView> {
        
-    var tipValue: Float?
+    var tipValue: Float = 0.0
+    var personNumber = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +25,16 @@ extension StartViewController: StartViewDelegate {
         tipValue = Float(Int(tipValueString)!) / Float(100)
         customView.tipChanged(sender: button)
     }
+    
+    func StartView(_ view: StartView, didTapStepper stepper: UIStepper) {
+        personNumber = Int(stepper.value)
+        customView.changePerson(number: personNumber)
+    }
+    
     func StartView(_ view: StartView, didTapCalculateButton button: UIButton) {
         let resultVC = ResultViewController()
         resultVC.modalPresentationStyle = .fullScreen
         self.present(resultVC, animated: true)
-        print(tipValue ?? 0.0)
+        print(tipValue)
     }
 }

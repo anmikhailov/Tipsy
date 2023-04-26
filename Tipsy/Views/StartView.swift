@@ -10,6 +10,7 @@ import UIKit
 protocol StartViewDelegate: AnyObject {
     func StartView(_ view: StartView, didTapTipButton button: UIButton)
     func StartView(_ view: StartView, didTapCalculateButton button: UIButton)
+    func StartView(_ view: StartView, didTapStepper stepper: UIStepper)
 }
 
 class StartView: CustomView {
@@ -138,7 +139,7 @@ class StartView: CustomView {
     
     private lazy var splitLabel: UILabel = {
         let element = UILabel()
-        element.text = "0"
+        element.text = "1"
         element.font = UIFont.systemFont(ofSize: 35)
         element.textColor = Resources.Colors.textFieldColor
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -147,8 +148,9 @@ class StartView: CustomView {
     
     private lazy var splitStepper: UIStepper = {
         let element = UIStepper()
+        element.minimumValue = 1
         element.translatesAutoresizingMaskIntoConstraints = false
-//        element.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
+        element.addTarget(self, action: #selector(didTapStepper), for: .valueChanged)
         return element
     }()
     
@@ -250,6 +252,10 @@ class StartView: CustomView {
         
         sender.isSelected = true
     }
+    
+    func changePerson(number: Int) {
+        splitLabel.text = String(number)
+    }
 }
 
 //MARK: - Actions
@@ -260,5 +266,9 @@ private extension StartView {
     
     @objc func didTapCalculateButton(_ button: UIButton) {
         delegate?.StartView(self, didTapCalculateButton: button)
+    }
+    
+    @objc func didTapStepper(_ stepper: UIStepper) {
+        delegate?.StartView(self, didTapStepper: stepper)
     }
 }
