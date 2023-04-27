@@ -10,10 +10,12 @@ import UIKit
 protocol StartViewDelegate: AnyObject {
     func StartView(_ view: StartView, didTapTipButton button: UIButton)
     func StartView(_ view: StartView, didTapCalculateButton button: UIButton)
+    func StartView(_ view: StartView, didTapStepper stepper: UIStepper)
 }
 
 class StartView: CustomView {
     weak var delegate: StartViewDelegate?
+    let noPasteTextFieldDelegate = NoPasteTextFieldDelegate()
     
     private lazy var titleUITextField: UILabel = {
         let element = UILabel()
@@ -37,8 +39,7 @@ class StartView: CustomView {
         
         element.textColor = Resources.Colors.textFieldColor
         element.textAlignment = .center
-        element.font = UIFont.systemFont(ofSize: 40)
-        
+        element.font = UIFont.boldSystemFont(ofSize: 40)
         element.keyboardType = .decimalPad
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -138,7 +139,7 @@ class StartView: CustomView {
     
     private lazy var splitLabel: UILabel = {
         let element = UILabel()
-        element.text = "0"
+        element.text = "1"
         element.font = UIFont.systemFont(ofSize: 35)
         element.textColor = Resources.Colors.textFieldColor
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -147,8 +148,9 @@ class StartView: CustomView {
     
     private lazy var splitStepper: UIStepper = {
         let element = UIStepper()
+        element.minimumValue = 1
         element.translatesAutoresizingMaskIntoConstraints = false
-//        element.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
+        element.addTarget(self, action: #selector(didTapStepper), for: .valueChanged)
         return element
     }()
     
@@ -183,6 +185,8 @@ class StartView: CustomView {
         
         splitHStack.addArrangedSubview(splitLabel)
         splitHStack.addArrangedSubview(splitStepper)
+        
+        textField.delegate = noPasteTextFieldDelegate
     }
     
     override func layoutViews() {
@@ -249,6 +253,17 @@ class StartView: CustomView {
         twentyPercentButton.isSelected = false
         
         sender.isSelected = true
+        
+        textField.endEditing(true)
+    }
+    
+    func changePerson(number: Int) {
+        splitLabel.text = String(number)
+        textField.endEditing(true)
+    }
+    
+    func getTextFieldData() -> String {
+        return textField.text ?? "0.0"
     }
 }
 
@@ -260,5 +275,9 @@ private extension StartView {
     
     @objc func didTapCalculateButton(_ button: UIButton) {
         delegate?.StartView(self, didTapCalculateButton: button)
+    }
+    
+    @objc func didTapStepper(_ stepper: UIStepper) {
+        delegate?.StartView(self, didTapStepper: stepper)
     }
 }
