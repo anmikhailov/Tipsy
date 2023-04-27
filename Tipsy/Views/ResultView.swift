@@ -107,6 +107,10 @@ class ResultView: CustomView {
     func setTotalPerPersonLabel(text: String) {
         moneyLabel.text = text
     }
+    
+    func setSettingsLabel(numberOfPeople: String, tip: String) {
+        settingsLabel.text = "Split between \(numberOfPeople) people,\nwith \(tip)% tip"
+    }
 }
 
 //MARK: - Targets

@@ -8,9 +8,6 @@
 import UIKit
 
 class StartViewController: CustomViewController<StartView> {
-       
-    var tipValue: Float = 0.0
-    var personNumber = 1
     
     let calculatorManager = CalculatorManager()
     
@@ -29,8 +26,9 @@ extension StartViewController: StartViewDelegate {
     }
     
     func StartView(_ view: StartView, didTapStepper stepper: UIStepper) {
-        personNumber = Int(stepper.value)
-        customView.changePerson(number: personNumber)
+        let stepperValue = Int(stepper.value)
+        calculatorManager.numberOfPerson = stepperValue
+        customView.changePerson(number: stepperValue)
     }
     
     func StartView(_ view: StartView, didTapCalculateButton button: UIButton) {
@@ -39,7 +37,8 @@ extension StartViewController: StartViewDelegate {
         let resultVC = ResultViewController()
         resultVC.modalPresentationStyle = .fullScreen
         resultVC.totalPerPerson = calculatorManager.getTotalPerPerson()
+        resultVC.numberOfPeople = calculatorManager.getSettings().numberOfPerson
+        resultVC.tip = calculatorManager.getSettings().tipInt
         self.present(resultVC, animated: true)
-        print(calculatorManager.getTotalPerPerson())
     }
 }

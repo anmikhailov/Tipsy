@@ -18,4 +18,8 @@ class CalculatorManager {
         tipPercentage = tipPercentageFloat / 100.0
         return (billTotal + billTotal * tipPercentage) / Float(numberOfPerson)
     }
+    
+    func getSettings() -> (numberOfPerson: Int, tipInt: Int) {
+        return (numberOfPerson, Int(tipPercentage * 100))
+    }
 }
