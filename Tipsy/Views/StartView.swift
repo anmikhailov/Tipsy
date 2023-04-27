@@ -15,6 +15,7 @@ protocol StartViewDelegate: AnyObject {
 
 class StartView: CustomView {
     weak var delegate: StartViewDelegate?
+    let noPasteTextFieldDelegate = NoPasteTextFieldDelegate()
     
     private lazy var titleUITextField: UILabel = {
         let element = UILabel()
@@ -184,6 +185,8 @@ class StartView: CustomView {
         
         splitHStack.addArrangedSubview(splitLabel)
         splitHStack.addArrangedSubview(splitStepper)
+        
+        textField.delegate = noPasteTextFieldDelegate
     }
     
     override func layoutViews() {
